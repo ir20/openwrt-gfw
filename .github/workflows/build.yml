@@ -15,7 +15,7 @@ jobs:
       run: |
         ${{ matrix.args }}
         echo "apm821xx-sata apm821xx-nand arc770-generic archs38-generic" | grep -w $ARCH
-        if [ $? -eq 1 ]; then BUILD_OPTION="-f Dockerfile-no-v2ray"; fi
+        if [ $? -eq 0 ]; then BUILD_OPTION="-f Dockerfile-no-v2ray"; fi
         docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH $BUILD_OPTION . && \
         docker push ${{ secrets.docker_repo }}:$ARCH && \
         docker cp $(docker run -d ${{ secrets.docker_repo }}:$ARCH):/output .
