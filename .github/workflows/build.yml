@@ -11,12 +11,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: login
-      run: echo ${{ secrets.docker_password }} | docker login -u ${{ secrets.docker_username }} --password-stdin
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build && push
       run: |
         ${{ matrix.args }}
         docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH . && \
         docker push ${{ secrets.docker_repo }}:$ARCH && \
+        docker run -d ${{ secrets.docker_repo }}:$ARCH && \
         wget http://`docker inspect `docker run -d ${{ secrets.docker_repo }}:$ARCH` | jq --raw-output '.[0].NetworkSettings.IPAddress'`/packages.tar.gz
     - name: extract
       run: |
