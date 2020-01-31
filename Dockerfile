@@ -67,6 +67,5 @@ RUN mv `find /build/sdk/bin/packages/ | grep shadowsocksr-libev-ssr-local` .
 RUN mv `find /build/sdk/bin/packages/ | grep luci-app-ssr-plus` .
 RUN mv `find /build/sdk/bin/packages/ | grep ChinaDNS` .
 RUN mv `find /build/sdk/bin/packages/ | grep luci-app-chinadns` .
-RUN rm -rf /build
 
 ENTRYPOINT ["/bin/bash", "-c", "python3 -u -m http.server -b `awk 'END{print $1}' /etc/hosts` 80"]
