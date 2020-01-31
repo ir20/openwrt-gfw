@@ -14,9 +14,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: login
       run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-    - name: env
-      run: ${{ matrix.args }}
-    - name: build
-      run: echo docker build --build-arg URL=$URL -t $DOCKER_REPO:$ARCH .
-    - name: push
-      run: echo docker push $DOCKER_REPO:$ARCH
+    - name: build && push
+      run: |
+        ${{ matrix.args }}
+        docker build --build-arg URL=$URL -t $DOCKER_REPO:$ARCH .
+        docker push $DOCKER_REPO:$ARCH
