@@ -71,5 +71,5 @@ env:
 - ARCH=archs38-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/archs38/generic/openwrt-sdk-19.07.0-archs38-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz
 - ARCH=ar71xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/generic/openwrt-sdk-19.07.0-ar71xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz
 install: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-script: docker build --build-arg URL=$URL -t $DOCKER_REPO:$ARCH .
+script: travis_wait 60 docker build --build-arg URL=$URL -t $DOCKER_REPO:$ARCH .
 after_success: docker push $DOCKER_REPO:$ARCH
