@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install
-      run: apt-get update && apt-get install jq
+      run: sudo apt-get update && sudo apt-get install jq wget
     - name: login
       run: echo ${{ secrets.docker_password }} | docker login -u ${{ secrets.docker_username }} --password-stdin
     - name: build && push
@@ -21,8 +21,8 @@ jobs:
         wget http://`docker inspect `docker run -d ${{ secrets.docker_repo }}:$ARCH` | jq --raw-output '.[0].NetworkSettings.IPAddress'`/packages.tar.gz
     - name: extract
       run: |
-        mkdir /output
-        tar xzvf packages.tar.gz -C /output
+        sudo mkdir /output
+        sudo tar xzvf packages.tar.gz -C /output
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
