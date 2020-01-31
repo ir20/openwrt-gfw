@@ -9,9 +9,8 @@ jobs:
     steps:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
-    - name: env
-      run: ${{ matrix.env }}
-    - name: build
-      run: docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH .
-    - name: push
-      run: docker push ${{ secrets.docker_repo }}:$ARCH
+    - name: build & push
+      run: |
+          ${{ matrix.env }}
+          docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH .
+          docker push ${{ secrets.docker_repo }}:$ARCH
