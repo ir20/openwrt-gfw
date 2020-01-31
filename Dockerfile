@@ -24,7 +24,7 @@ RUN git clone -q https://github.com/aa65535/openwrt-chinadns.git package/chinadn
 RUN git clone -q https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
 
 # Config
-RUN make --quiet defconfig
+RUN bash -c "make --quiet defconfig" > /dev/null
 RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan=m/CONFIG_PACKAGE_trojan=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-client=m/CONFIG_PACKAGE_kcptun-client=y/g' .config
@@ -39,20 +39,20 @@ RUN sed -i 's/CONFIG_PACKAGE_luci-app-chinadns=m/CONFIG_PACKAGE_luci-app-chinadn
 RUN echo "CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y" >> .config
 
 # Compile
-RUN ./scripts/feeds update -a > /dev/null
-RUN ./scripts/feeds install libuv pcre zlib openssl boost golang > /dev/null
+RUN bash -c "./scripts/feeds update -a" > /dev/null
+RUN bash -c "./scripts/feeds install libuv pcre zlib openssl boost golang" > /dev/null
 
 RUN pushd package/openwrt-dist-luci/tools/po2lmo && make && make install && popd
 
-RUN make --quiet package/v2ray/compile V=99
-RUN make --quiet package/trojan/compile V=99
-RUN make --quiet package/kcptun/compile V=99
-RUN make --quiet package/ipt2socks/compile V=99
-RUN make --quiet package/pdnsd-alt/compile V=99
-RUN make --quiet package/shadowsocksr-libev/compile V=99
-RUN make --quiet package/luci-app-ssr-plus/compile V=99
-RUN make --quiet package/chinadns/compile V=99
-RUN make --quiet package/openwrt-dist-luci/compile V=99
+RUN bash -c "make --quiet package/v2ray/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/trojan/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/kcptun/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/ipt2socks/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/pdnsd-alt/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/shadowsocksr-libev/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/luci-app-ssr-plus/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/chinadns/compile V=99" > /dev/null
+RUN bash -c "make --quiet package/openwrt-dist-luci/compile V=99" > /dev/null
 
 # Output
 WORKDIR /output
