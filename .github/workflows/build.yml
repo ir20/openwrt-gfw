@@ -14,4 +14,4 @@ jobs:
     - name: build
       run: docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH .
     - name: push
-      run: docker push ${{ secrets.docker_rerpo }}:$ARCH
+      run: docker push ${{ secrets.docker_repo }}:$ARCH
