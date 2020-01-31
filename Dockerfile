@@ -2,8 +2,8 @@ FROM debian:buster
 
 # Init
 SHELL ["/bin/bash", "-c"]
-RUN apt-get -qq update && apt-get -qq upgrade
-RUN apt-get install -yqq wget xz-utils git build-essential libncurses5-dev gawk unzip python python3 file
+RUN apt-get update > /dev/null && apt-get upgrade > /dev/null
+RUN apt-get install -y wget xz-utils git build-essential libncurses5-dev gawk unzip python python3 file > /dev/null
 
 # Prepare sdk
 WORKDIR /build
@@ -39,8 +39,8 @@ RUN sed -i 's/CONFIG_PACKAGE_luci-app-chinadns=m/CONFIG_PACKAGE_luci-app-chinadn
 RUN echo "CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y" >> .config
 
 # Compile
-RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install libuv pcre zlib openssl boost golang
+RUN ./scripts/feeds update -a > /dev/null
+RUN ./scripts/feeds install libuv pcre zlib openssl boost golang > /dev/null
 
 RUN pushd package/openwrt-dist-luci/tools/po2lmo && make && make install && popd
 
