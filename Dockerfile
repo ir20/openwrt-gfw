@@ -2,15 +2,15 @@ FROM debian:buster
 
 # Init
 SHELL ["/bin/bash", "-c"]
-RUN apt-get update > /dev/null && apt-get upgrade > /dev/null
-RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev gawk unzip python python3 file > /dev/null
+RUN apt-get update && apt-get upgrade
+RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev gawk unzip python python3 file
 
 # Prepare sdk
 WORKDIR /build
 ARG URL
 RUN wget -q $URL
 RUN FILE="${URL##*/}" && tar xf "${FILE}" &&  mv "${FILE%.*.*}" sdk
-RUN git clone -q https://github.com/coolsnowwolf/lede
+RUN git clone https://github.com/coolsnowwolf/lede
 
 WORKDIR /build/sdk
 RUN cp -r ../lede/package/lean/v2ray package/
@@ -20,11 +20,11 @@ RUN cp -r ../lede/package/lean/ipt2socks package/
 RUN cp -r ../lede/package/lean/pdnsd-alt package/
 RUN cp -r ../lede/package/lean/shadowsocksr-libev package/
 RUN cp -r ../lede/package/lean/luci-app-ssr-plus package/
-RUN git clone -q https://github.com/aa65535/openwrt-chinadns.git package/chinadns
-RUN git clone -q https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
+RUN git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
+RUN git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
 
 # Config
-RUN bash -c "make --quiet defconfig" > /dev/null
+RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan=m/CONFIG_PACKAGE_trojan=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-client=m/CONFIG_PACKAGE_kcptun-client=y/g' .config
@@ -39,20 +39,20 @@ RUN sed -i 's/CONFIG_PACKAGE_luci-app-chinadns=m/CONFIG_PACKAGE_luci-app-chinadn
 RUN echo "CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y" >> .config
 
 # Compile
-RUN bash -c "./scripts/feeds update -a" > /dev/null
-RUN bash -c "./scripts/feeds install libuv pcre zlib openssl boost golang" > /dev/null
+RUN ./scripts/feeds update -a
+RUN ./scripts/feeds install libuv pcre zlib openssl boost golang
 
 RUN pushd package/openwrt-dist-luci/tools/po2lmo && make && make install && popd
 
-RUN bash -c "make --quiet package/v2ray/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/trojan/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/kcptun/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/ipt2socks/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/pdnsd-alt/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/shadowsocksr-libev/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/luci-app-ssr-plus/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/chinadns/compile V=99" > /dev/null
-RUN bash -c "make --quiet package/openwrt-dist-luci/compile V=99" > /dev/null
+RUN make package/v2ray/compile V=99
+RUN make package/trojan/compile V=99
+RUN make package/kcptun/compile V=99
+RUN make package/ipt2socks/compile V=99
+RUN make package/pdnsd-alt/compile V=99
+RUN make package/shadowsocksr-libev/compile V=99
+RUN make package/luci-app-ssr-plus/compile V=99
+RUN make package/chinadns/compile V=99
+RUN make package/openwrt-dist-luci/compile V=99
 
 # Output
 WORKDIR /output
