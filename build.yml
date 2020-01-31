@@ -13,5 +13,5 @@ jobs:
     - name: build && push
       run: |
         ${{ matrix.args }}
-        docker build --build-arg URL=$URL -t $DOCKER_REPO:$ARCH .
+        docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH .
         docker push ${{ secrets.docker_repo }}:$ARCH
