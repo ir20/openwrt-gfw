@@ -22,6 +22,8 @@ jobs:
         docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH . && \
         docker push ${{ secrets.docker_repo }}:$ARCH && \
         docker cp $(docker run -d ${{ secrets.docker_repo }}:$ARCH):/output .
+        mkdir output/$ARCH && \
+        mv output/*.ipk $ARCH
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
