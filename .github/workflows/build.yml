@@ -1,31 +1,1477 @@
 on:
   push:
-      branches:
-        - master
+    branches:
+      - master
   schedule:
-      - cron:  '0 0 * * 0'
+    - cron:  '0 0 * * 0'
 jobs:
-  build:
-    name: Build
+  apm821xx-sata:
+    name: apm821xx-sata
     runs-on: ubuntu-18.04
-    strategy:
-      fail-fast: false
-      matrix:
-        args: ['ARCH=apm821xx-sata URL=https://downloads.openwrt.org/releases/19.07.0/targets/apm821xx/sata/openwrt-sdk-19.07.0-apm821xx-sata_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=pistachio-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/pistachio/generic/openwrt-sdk-19.07.0-pistachio_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=x86-legacy URL=https://downloads.openwrt.org/releases/19.07.0/targets/x86/legacy/openwrt-sdk-19.07.0-x86-legacy_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ramips-rt3883 URL=https://downloads.openwrt.org/releases/19.07.0/targets/ramips/rt3883/openwrt-sdk-19.07.0-ramips-rt3883_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=zynq-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/zynq/generic/openwrt-sdk-19.07.0-zynq_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=x86-geode URL=https://downloads.openwrt.org/releases/19.07.0/targets/x86/geode/openwrt-sdk-19.07.0-x86-geode_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=octeontx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/octeontx/generic/openwrt-sdk-19.07.0-octeontx_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=sunxi-cortexa8 URL=https://downloads.openwrt.org/releases/19.07.0/targets/sunxi/cortexa8/openwrt-sdk-19.07.0-sunxi-cortexa8_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=tegra-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/tegra/generic/openwrt-sdk-19.07.0-tegra_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=mediatek-mt7622 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mediatek/mt7622/openwrt-sdk-19.07.0-mediatek-mt7622_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=mediatek-mt7623 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mediatek/mt7623/openwrt-sdk-19.07.0-mediatek-mt7623_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=sunxi-cortexa7 URL=https://downloads.openwrt.org/releases/19.07.0/targets/sunxi/cortexa7/openwrt-sdk-19.07.0-sunxi-cortexa7_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=mxs-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/mxs/generic/openwrt-sdk-19.07.0-mxs_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=mpc85xx-p2020 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mpc85xx/p2020/openwrt-sdk-19.07.0-mpc85xx-p2020_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=octeon-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/octeon/generic/openwrt-sdk-19.07.0-octeon_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=oxnas-ox820 URL=https://downloads.openwrt.org/releases/19.07.0/targets/oxnas/ox820/openwrt-sdk-19.07.0-oxnas-ox820_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=apm821xx-nand URL=https://downloads.openwrt.org/releases/19.07.0/targets/apm821xx/nand/openwrt-sdk-19.07.0-apm821xx-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=layerscape-armv8_64b URL=https://downloads.openwrt.org/releases/19.07.0/targets/layerscape/armv8_64b/openwrt-sdk-19.07.0-layerscape-armv8_64b_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=malta-be URL=https://downloads.openwrt.org/releases/19.07.0/targets/malta/be/openwrt-sdk-19.07.0-malta-be_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=omap-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/omap/generic/openwrt-sdk-19.07.0-omap_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=layerscape-armv7 URL=https://downloads.openwrt.org/releases/19.07.0/targets/layerscape/armv7/openwrt-sdk-19.07.0-layerscape-armv7_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=mpc85xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/mpc85xx/generic/openwrt-sdk-19.07.0-mpc85xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=mvebu-cortexa72 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mvebu/cortexa72/openwrt-sdk-19.07.0-mvebu-cortexa72_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=mpc85xx-p1020 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mpc85xx/p1020/openwrt-sdk-19.07.0-mpc85xx-p1020_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=mvebu-cortexa53 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mvebu/cortexa53/openwrt-sdk-19.07.0-mvebu-cortexa53_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=samsung-s5pv210 URL=https://downloads.openwrt.org/releases/19.07.0/targets/samsung/s5pv210/openwrt-sdk-19.07.0-samsung-s5pv210_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=x86-64 URL=https://downloads.openwrt.org/releases/19.07.0/targets/x86/64/openwrt-sdk-19.07.0-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=x86-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/x86/generic/openwrt-sdk-19.07.0-x86-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ramips-rt288x URL=https://downloads.openwrt.org/releases/19.07.0/targets/ramips/rt288x/openwrt-sdk-19.07.0-ramips-rt288x_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=rb532-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/rb532/generic/openwrt-sdk-19.07.0-rb532_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=mvebu-cortexa9 URL=https://downloads.openwrt.org/releases/19.07.0/targets/mvebu/cortexa9/openwrt-sdk-19.07.0-mvebu-cortexa9_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=ramips-mt7621 URL=https://downloads.openwrt.org/releases/19.07.0/targets/ramips/mt7621/openwrt-sdk-19.07.0-ramips-mt7621_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ramips-rt305x URL=https://downloads.openwrt.org/releases/19.07.0/targets/ramips/rt305x/openwrt-sdk-19.07.0-ramips-rt305x_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ramips-mt76x8 URL=https://downloads.openwrt.org/releases/19.07.0/targets/ramips/mt76x8/openwrt-sdk-19.07.0-ramips-mt76x8_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=sunxi-cortexa53 URL=https://downloads.openwrt.org/releases/19.07.0/targets/sunxi/cortexa53/openwrt-sdk-19.07.0-sunxi-cortexa53_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ramips-mt7620 URL=https://downloads.openwrt.org/releases/19.07.0/targets/ramips/mt7620/openwrt-sdk-19.07.0-ramips-mt7620_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=lantiq-xway_legacy URL=https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/xway_legacy/openwrt-sdk-19.07.0-lantiq-xway_legacy_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=lantiq-xway URL=https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/xway/openwrt-sdk-19.07.0-lantiq-xway_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ipq806x-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/ipq806x/generic/openwrt-sdk-19.07.0-ipq806x-generic_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=lantiq-falcon URL=https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/falcon/openwrt-sdk-19.07.0-lantiq-falcon_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ipq40xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/ipq40xx/generic/openwrt-sdk-19.07.0-ipq40xx-generic_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=cns3xxx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/cns3xxx/generic/openwrt-sdk-19.07.0-cns3xxx_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=brcm47xx-mips74k URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm47xx/mips74k/openwrt-sdk-19.07.0-brcm47xx-mips74k_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=brcm2708-bcm2710 URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm2708/bcm2710/openwrt-sdk-19.07.0-brcm2708-bcm2710_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ath79-nand URL=https://downloads.openwrt.org/releases/19.07.0/targets/ath79/nand/openwrt-sdk-19.07.0-ath79-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=brcm47xx-legacy URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm47xx/legacy/openwrt-sdk-19.07.0-brcm47xx-legacy_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=brcm2708-bcm2709 URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm2708/bcm2709/openwrt-sdk-19.07.0-brcm2708-bcm2709_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=ath25-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/ath25/generic/openwrt-sdk-19.07.0-ath25_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=brcm2708-bcm2708 URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm2708/bcm2708/openwrt-sdk-19.07.0-brcm2708-bcm2708_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=ath79-tiny URL=https://downloads.openwrt.org/releases/19.07.0/targets/ath79/tiny/openwrt-sdk-19.07.0-ath79-tiny_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=bcm53xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/bcm53xx/generic/openwrt-sdk-19.07.0-bcm53xx_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=imx6-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/imx6/generic/openwrt-sdk-19.07.0-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=ath79-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/ath79/generic/openwrt-sdk-19.07.0-ath79-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=kirkwood-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/kirkwood/generic/openwrt-sdk-19.07.0-kirkwood_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=brcm47xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm47xx/generic/openwrt-sdk-19.07.0-brcm47xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=gemini-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/gemini/generic/openwrt-sdk-19.07.0-gemini_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=brcm63xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm63xx/generic/openwrt-sdk-19.07.0-brcm63xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=brcm63xx-smp URL=https://downloads.openwrt.org/releases/19.07.0/targets/brcm63xx/smp/openwrt-sdk-19.07.0-brcm63xx-smp_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=lantiq-xrx200 URL=https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/xrx200/openwrt-sdk-19.07.0-lantiq-xrx200_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=lantiq-ase URL=https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/ase/openwrt-sdk-19.07.0-lantiq-ase_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=armvirt-64 URL=https://downloads.openwrt.org/releases/19.07.0/targets/armvirt/64/openwrt-sdk-19.07.0-armvirt-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=at91-sama5 URL=https://downloads.openwrt.org/releases/19.07.0/targets/at91/sama5/openwrt-sdk-19.07.0-at91-sama5_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=armvirt-32 URL=https://downloads.openwrt.org/releases/19.07.0/targets/armvirt/32/openwrt-sdk-19.07.0-armvirt-32_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=at91-sam9x URL=https://downloads.openwrt.org/releases/19.07.0/targets/at91/sam9x/openwrt-sdk-19.07.0-at91-sam9x_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz', 'ARCH=ar71xx-tiny URL=https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/tiny/openwrt-sdk-19.07.0-ar71xx-tiny_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ar71xx-nand URL=https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/nand/openwrt-sdk-19.07.0-ar71xx-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=ar71xx-mikrotik URL=https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/mikrotik/openwrt-sdk-19.07.0-ar71xx-mikrotik_gcc-7.5.0_musl.Linux-x86_64.tar.xz', 'ARCH=arc770-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/arc770/generic/openwrt-sdk-19.07.0-arc770-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz', 'ARCH=archs38-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/archs38/generic/openwrt-sdk-19.07.0-archs38-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz', 'ARCH=ar71xx-generic URL=https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/generic/openwrt-sdk-19.07.0-ar71xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz']
+    env:
+      arch: apm821xx-sata
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/apm821xx/sata/openwrt-sdk-19.07.0-apm821xx-sata_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
     steps:
     - uses: actions/checkout@v2
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
-    - name: build && push
-      run: |
-        ${{ matrix.args }}
-        docker build --build-arg URL=$URL -t ${{ secrets.docker_repo }}:$ARCH . && \
-        docker push ${{ secrets.docker_repo }}:$ARCH && \
-        docker cp $(docker run -d ${{ secrets.docker_repo }}:$ARCH):/output . && \
-        mkdir output/$ARCH  && \
-        mv output/*.ipk output/$ARCH
-    - name: Upload artifact
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ipks_all
-        path: output
+        name: ${{ arch }}
+        path: ${{ arch }}
+  pistachio-generic:
+    name: pistachio-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: pistachio-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/pistachio/generic/openwrt-sdk-19.07.0-pistachio_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  x86-legacy:
+    name: x86-legacy
+    runs-on: ubuntu-18.04
+    env:
+      arch: x86-legacy
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/x86/legacy/openwrt-sdk-19.07.0-x86-legacy_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ramips-rt3883:
+    name: ramips-rt3883
+    runs-on: ubuntu-18.04
+    env:
+      arch: ramips-rt3883
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ramips/rt3883/openwrt-sdk-19.07.0-ramips-rt3883_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  zynq-generic:
+    name: zynq-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: zynq-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/zynq/generic/openwrt-sdk-19.07.0-zynq_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  x86-geode:
+    name: x86-geode
+    runs-on: ubuntu-18.04
+    env:
+      arch: x86-geode
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/x86/geode/openwrt-sdk-19.07.0-x86-geode_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  octeontx-generic:
+    name: octeontx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: octeontx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/octeontx/generic/openwrt-sdk-19.07.0-octeontx_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  sunxi-cortexa8:
+    name: sunxi-cortexa8
+    runs-on: ubuntu-18.04
+    env:
+      arch: sunxi-cortexa8
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/sunxi/cortexa8/openwrt-sdk-19.07.0-sunxi-cortexa8_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  tegra-generic:
+    name: tegra-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: tegra-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/tegra/generic/openwrt-sdk-19.07.0-tegra_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mediatek-mt7622:
+    name: mediatek-mt7622
+    runs-on: ubuntu-18.04
+    env:
+      arch: mediatek-mt7622
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mediatek/mt7622/openwrt-sdk-19.07.0-mediatek-mt7622_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mediatek-mt7623:
+    name: mediatek-mt7623
+    runs-on: ubuntu-18.04
+    env:
+      arch: mediatek-mt7623
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mediatek/mt7623/openwrt-sdk-19.07.0-mediatek-mt7623_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  sunxi-cortexa7:
+    name: sunxi-cortexa7
+    runs-on: ubuntu-18.04
+    env:
+      arch: sunxi-cortexa7
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/sunxi/cortexa7/openwrt-sdk-19.07.0-sunxi-cortexa7_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mxs-generic:
+    name: mxs-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: mxs-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mxs/generic/openwrt-sdk-19.07.0-mxs_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mpc85xx-p2020:
+    name: mpc85xx-p2020
+    runs-on: ubuntu-18.04
+    env:
+      arch: mpc85xx-p2020
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mpc85xx/p2020/openwrt-sdk-19.07.0-mpc85xx-p2020_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  octeon-generic:
+    name: octeon-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: octeon-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/octeon/generic/openwrt-sdk-19.07.0-octeon_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  oxnas-ox820:
+    name: oxnas-ox820
+    runs-on: ubuntu-18.04
+    env:
+      arch: oxnas-ox820
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/oxnas/ox820/openwrt-sdk-19.07.0-oxnas-ox820_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  apm821xx-nand:
+    name: apm821xx-nand
+    runs-on: ubuntu-18.04
+    env:
+      arch: apm821xx-nand
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/apm821xx/nand/openwrt-sdk-19.07.0-apm821xx-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  layerscape-armv8_64b:
+    name: layerscape-armv8_64b
+    runs-on: ubuntu-18.04
+    env:
+      arch: layerscape-armv8_64b
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/layerscape/armv8_64b/openwrt-sdk-19.07.0-layerscape-armv8_64b_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  malta-be:
+    name: malta-be
+    runs-on: ubuntu-18.04
+    env:
+      arch: malta-be
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/malta/be/openwrt-sdk-19.07.0-malta-be_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  omap-generic:
+    name: omap-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: omap-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/omap/generic/openwrt-sdk-19.07.0-omap_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  layerscape-armv7:
+    name: layerscape-armv7
+    runs-on: ubuntu-18.04
+    env:
+      arch: layerscape-armv7
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/layerscape/armv7/openwrt-sdk-19.07.0-layerscape-armv7_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mpc85xx-generic:
+    name: mpc85xx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: mpc85xx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mpc85xx/generic/openwrt-sdk-19.07.0-mpc85xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mvebu-cortexa72:
+    name: mvebu-cortexa72
+    runs-on: ubuntu-18.04
+    env:
+      arch: mvebu-cortexa72
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mvebu/cortexa72/openwrt-sdk-19.07.0-mvebu-cortexa72_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mpc85xx-p1020:
+    name: mpc85xx-p1020
+    runs-on: ubuntu-18.04
+    env:
+      arch: mpc85xx-p1020
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mpc85xx/p1020/openwrt-sdk-19.07.0-mpc85xx-p1020_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mvebu-cortexa53:
+    name: mvebu-cortexa53
+    runs-on: ubuntu-18.04
+    env:
+      arch: mvebu-cortexa53
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mvebu/cortexa53/openwrt-sdk-19.07.0-mvebu-cortexa53_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  samsung-s5pv210:
+    name: samsung-s5pv210
+    runs-on: ubuntu-18.04
+    env:
+      arch: samsung-s5pv210
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/samsung/s5pv210/openwrt-sdk-19.07.0-samsung-s5pv210_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  x86-64:
+    name: x86-64
+    runs-on: ubuntu-18.04
+    env:
+      arch: x86-64
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/x86/64/openwrt-sdk-19.07.0-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  x86-generic:
+    name: x86-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: x86-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/x86/generic/openwrt-sdk-19.07.0-x86-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ramips-rt288x:
+    name: ramips-rt288x
+    runs-on: ubuntu-18.04
+    env:
+      arch: ramips-rt288x
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ramips/rt288x/openwrt-sdk-19.07.0-ramips-rt288x_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  rb532-generic:
+    name: rb532-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: rb532-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/rb532/generic/openwrt-sdk-19.07.0-rb532_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  mvebu-cortexa9:
+    name: mvebu-cortexa9
+    runs-on: ubuntu-18.04
+    env:
+      arch: mvebu-cortexa9
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/mvebu/cortexa9/openwrt-sdk-19.07.0-mvebu-cortexa9_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ramips-mt7621:
+    name: ramips-mt7621
+    runs-on: ubuntu-18.04
+    env:
+      arch: ramips-mt7621
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ramips/mt7621/openwrt-sdk-19.07.0-ramips-mt7621_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ramips-rt305x:
+    name: ramips-rt305x
+    runs-on: ubuntu-18.04
+    env:
+      arch: ramips-rt305x
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ramips/rt305x/openwrt-sdk-19.07.0-ramips-rt305x_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ramips-mt76x8:
+    name: ramips-mt76x8
+    runs-on: ubuntu-18.04
+    env:
+      arch: ramips-mt76x8
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ramips/mt76x8/openwrt-sdk-19.07.0-ramips-mt76x8_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  sunxi-cortexa53:
+    name: sunxi-cortexa53
+    runs-on: ubuntu-18.04
+    env:
+      arch: sunxi-cortexa53
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/sunxi/cortexa53/openwrt-sdk-19.07.0-sunxi-cortexa53_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ramips-mt7620:
+    name: ramips-mt7620
+    runs-on: ubuntu-18.04
+    env:
+      arch: ramips-mt7620
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ramips/mt7620/openwrt-sdk-19.07.0-ramips-mt7620_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  lantiq-xway_legacy:
+    name: lantiq-xway_legacy
+    runs-on: ubuntu-18.04
+    env:
+      arch: lantiq-xway_legacy
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/xway_legacy/openwrt-sdk-19.07.0-lantiq-xway_legacy_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  lantiq-xway:
+    name: lantiq-xway
+    runs-on: ubuntu-18.04
+    env:
+      arch: lantiq-xway
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/xway/openwrt-sdk-19.07.0-lantiq-xway_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ipq806x-generic:
+    name: ipq806x-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: ipq806x-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ipq806x/generic/openwrt-sdk-19.07.0-ipq806x-generic_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  lantiq-falcon:
+    name: lantiq-falcon
+    runs-on: ubuntu-18.04
+    env:
+      arch: lantiq-falcon
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/falcon/openwrt-sdk-19.07.0-lantiq-falcon_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ipq40xx-generic:
+    name: ipq40xx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: ipq40xx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ipq40xx/generic/openwrt-sdk-19.07.0-ipq40xx-generic_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  cns3xxx-generic:
+    name: cns3xxx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: cns3xxx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/cns3xxx/generic/openwrt-sdk-19.07.0-cns3xxx_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm47xx-mips74k:
+    name: brcm47xx-mips74k
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm47xx-mips74k
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm47xx/mips74k/openwrt-sdk-19.07.0-brcm47xx-mips74k_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm2708-bcm2710:
+    name: brcm2708-bcm2710
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm2708-bcm2710
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm2708/bcm2710/openwrt-sdk-19.07.0-brcm2708-bcm2710_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ath79-nand:
+    name: ath79-nand
+    runs-on: ubuntu-18.04
+    env:
+      arch: ath79-nand
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ath79/nand/openwrt-sdk-19.07.0-ath79-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm47xx-legacy:
+    name: brcm47xx-legacy
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm47xx-legacy
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm47xx/legacy/openwrt-sdk-19.07.0-brcm47xx-legacy_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm2708-bcm2709:
+    name: brcm2708-bcm2709
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm2708-bcm2709
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm2708/bcm2709/openwrt-sdk-19.07.0-brcm2708-bcm2709_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ath25-generic:
+    name: ath25-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: ath25-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ath25/generic/openwrt-sdk-19.07.0-ath25_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm2708-bcm2708:
+    name: brcm2708-bcm2708
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm2708-bcm2708
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm2708/bcm2708/openwrt-sdk-19.07.0-brcm2708-bcm2708_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ath79-tiny:
+    name: ath79-tiny
+    runs-on: ubuntu-18.04
+    env:
+      arch: ath79-tiny
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ath79/tiny/openwrt-sdk-19.07.0-ath79-tiny_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  bcm53xx-generic:
+    name: bcm53xx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: bcm53xx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/bcm53xx/generic/openwrt-sdk-19.07.0-bcm53xx_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  imx6-generic:
+    name: imx6-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: imx6-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/imx6/generic/openwrt-sdk-19.07.0-imx6_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ath79-generic:
+    name: ath79-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: ath79-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ath79/generic/openwrt-sdk-19.07.0-ath79-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  kirkwood-generic:
+    name: kirkwood-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: kirkwood-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/kirkwood/generic/openwrt-sdk-19.07.0-kirkwood_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm47xx-generic:
+    name: brcm47xx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm47xx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm47xx/generic/openwrt-sdk-19.07.0-brcm47xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  gemini-generic:
+    name: gemini-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: gemini-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/gemini/generic/openwrt-sdk-19.07.0-gemini_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm63xx-generic:
+    name: brcm63xx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm63xx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm63xx/generic/openwrt-sdk-19.07.0-brcm63xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  brcm63xx-smp:
+    name: brcm63xx-smp
+    runs-on: ubuntu-18.04
+    env:
+      arch: brcm63xx-smp
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/brcm63xx/smp/openwrt-sdk-19.07.0-brcm63xx-smp_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  lantiq-xrx200:
+    name: lantiq-xrx200
+    runs-on: ubuntu-18.04
+    env:
+      arch: lantiq-xrx200
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/xrx200/openwrt-sdk-19.07.0-lantiq-xrx200_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  lantiq-ase:
+    name: lantiq-ase
+    runs-on: ubuntu-18.04
+    env:
+      arch: lantiq-ase
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/lantiq/ase/openwrt-sdk-19.07.0-lantiq-ase_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  armvirt-64:
+    name: armvirt-64
+    runs-on: ubuntu-18.04
+    env:
+      arch: armvirt-64
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/armvirt/64/openwrt-sdk-19.07.0-armvirt-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  at91-sama5:
+    name: at91-sama5
+    runs-on: ubuntu-18.04
+    env:
+      arch: at91-sama5
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/at91/sama5/openwrt-sdk-19.07.0-at91-sama5_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  armvirt-32:
+    name: armvirt-32
+    runs-on: ubuntu-18.04
+    env:
+      arch: armvirt-32
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/armvirt/32/openwrt-sdk-19.07.0-armvirt-32_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  at91-sam9x:
+    name: at91-sam9x
+    runs-on: ubuntu-18.04
+    env:
+      arch: at91-sam9x
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/at91/sam9x/openwrt-sdk-19.07.0-at91-sam9x_gcc-7.5.0_musl_eabi.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ar71xx-tiny:
+    name: ar71xx-tiny
+    runs-on: ubuntu-18.04
+    env:
+      arch: ar71xx-tiny
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/tiny/openwrt-sdk-19.07.0-ar71xx-tiny_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ar71xx-nand:
+    name: ar71xx-nand
+    runs-on: ubuntu-18.04
+    env:
+      arch: ar71xx-nand
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/nand/openwrt-sdk-19.07.0-ar71xx-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ar71xx-mikrotik:
+    name: ar71xx-mikrotik
+    runs-on: ubuntu-18.04
+    env:
+      arch: ar71xx-mikrotik
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/mikrotik/openwrt-sdk-19.07.0-ar71xx-mikrotik_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  arc770-generic:
+    name: arc770-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: arc770-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/arc770/generic/openwrt-sdk-19.07.0-arc770-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  archs38-generic:
+    name: archs38-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: archs38-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/archs38/generic/openwrt-sdk-19.07.0-archs38-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
+  ar71xx-generic:
+    name: ar71xx-generic
+    runs-on: ubuntu-18.04
+    env:
+      arch: ar71xx-generic
+      url: 'https://downloads.openwrt.org/releases/19.07.0/targets/ar71xx/generic/openwrt-sdk-19.07.0-ar71xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
+    steps:
+    - uses: actions/checkout@v2
+    - name: login
+      run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
+    - name: build
+      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+    - name: push
+      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+    - name: output
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+    - name: upload
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{ arch }}
+        path: ${{ arch }}
