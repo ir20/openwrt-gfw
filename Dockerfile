@@ -24,6 +24,7 @@ RUN git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
 RUN git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
 
 # Config
+RUN sed -i 's/default y/default n/g' package/v2ray/Config.in
 RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan=m/CONFIG_PACKAGE_trojan=y/g' .config
