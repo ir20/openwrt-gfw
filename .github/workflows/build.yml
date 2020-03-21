@@ -16,16 +16,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   pistachio-generic:
     name: pistachio-generic
     runs-on: ubuntu-18.04
@@ -37,16 +37,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   x86-legacy:
     name: x86-legacy
     runs-on: ubuntu-18.04
@@ -58,16 +58,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ramips-rt3883:
     name: ramips-rt3883
     runs-on: ubuntu-18.04
@@ -79,16 +79,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   zynq-generic:
     name: zynq-generic
     runs-on: ubuntu-18.04
@@ -100,16 +100,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   x86-geode:
     name: x86-geode
     runs-on: ubuntu-18.04
@@ -121,16 +121,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   octeontx-generic:
     name: octeontx-generic
     runs-on: ubuntu-18.04
@@ -142,16 +142,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   sunxi-cortexa8:
     name: sunxi-cortexa8
     runs-on: ubuntu-18.04
@@ -163,16 +163,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   tegra-generic:
     name: tegra-generic
     runs-on: ubuntu-18.04
@@ -184,16 +184,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mediatek-mt7622:
     name: mediatek-mt7622
     runs-on: ubuntu-18.04
@@ -205,16 +205,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mediatek-mt7623:
     name: mediatek-mt7623
     runs-on: ubuntu-18.04
@@ -226,16 +226,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   sunxi-cortexa7:
     name: sunxi-cortexa7
     runs-on: ubuntu-18.04
@@ -247,16 +247,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mxs-generic:
     name: mxs-generic
     runs-on: ubuntu-18.04
@@ -268,16 +268,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mpc85xx-p2020:
     name: mpc85xx-p2020
     runs-on: ubuntu-18.04
@@ -289,16 +289,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   octeon-generic:
     name: octeon-generic
     runs-on: ubuntu-18.04
@@ -310,16 +310,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   oxnas-ox820:
     name: oxnas-ox820
     runs-on: ubuntu-18.04
@@ -331,16 +331,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   apm821xx-nand:
     name: apm821xx-nand
     runs-on: ubuntu-18.04
@@ -352,16 +352,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   layerscape-armv8_64b:
     name: layerscape-armv8_64b
     runs-on: ubuntu-18.04
@@ -373,16 +373,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   malta-be:
     name: malta-be
     runs-on: ubuntu-18.04
@@ -394,16 +394,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   omap-generic:
     name: omap-generic
     runs-on: ubuntu-18.04
@@ -415,16 +415,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   layerscape-armv7:
     name: layerscape-armv7
     runs-on: ubuntu-18.04
@@ -436,16 +436,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mpc85xx-generic:
     name: mpc85xx-generic
     runs-on: ubuntu-18.04
@@ -457,16 +457,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mvebu-cortexa72:
     name: mvebu-cortexa72
     runs-on: ubuntu-18.04
@@ -478,16 +478,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mpc85xx-p1020:
     name: mpc85xx-p1020
     runs-on: ubuntu-18.04
@@ -499,16 +499,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mvebu-cortexa53:
     name: mvebu-cortexa53
     runs-on: ubuntu-18.04
@@ -520,16 +520,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   samsung-s5pv210:
     name: samsung-s5pv210
     runs-on: ubuntu-18.04
@@ -541,16 +541,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   x86-64:
     name: x86-64
     runs-on: ubuntu-18.04
@@ -562,16 +562,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   x86-generic:
     name: x86-generic
     runs-on: ubuntu-18.04
@@ -583,16 +583,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ramips-rt288x:
     name: ramips-rt288x
     runs-on: ubuntu-18.04
@@ -604,16 +604,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   rb532-generic:
     name: rb532-generic
     runs-on: ubuntu-18.04
@@ -625,16 +625,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   mvebu-cortexa9:
     name: mvebu-cortexa9
     runs-on: ubuntu-18.04
@@ -646,16 +646,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ramips-mt7621:
     name: ramips-mt7621
     runs-on: ubuntu-18.04
@@ -667,16 +667,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ramips-rt305x:
     name: ramips-rt305x
     runs-on: ubuntu-18.04
@@ -688,16 +688,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ramips-mt76x8:
     name: ramips-mt76x8
     runs-on: ubuntu-18.04
@@ -709,16 +709,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   sunxi-cortexa53:
     name: sunxi-cortexa53
     runs-on: ubuntu-18.04
@@ -730,16 +730,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ramips-mt7620:
     name: ramips-mt7620
     runs-on: ubuntu-18.04
@@ -751,16 +751,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   lantiq-xway_legacy:
     name: lantiq-xway_legacy
     runs-on: ubuntu-18.04
@@ -772,16 +772,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   lantiq-xway:
     name: lantiq-xway
     runs-on: ubuntu-18.04
@@ -793,16 +793,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ipq806x-generic:
     name: ipq806x-generic
     runs-on: ubuntu-18.04
@@ -814,16 +814,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   lantiq-falcon:
     name: lantiq-falcon
     runs-on: ubuntu-18.04
@@ -835,16 +835,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ipq40xx-generic:
     name: ipq40xx-generic
     runs-on: ubuntu-18.04
@@ -856,16 +856,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   cns3xxx-generic:
     name: cns3xxx-generic
     runs-on: ubuntu-18.04
@@ -877,16 +877,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm47xx-mips74k:
     name: brcm47xx-mips74k
     runs-on: ubuntu-18.04
@@ -898,16 +898,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm2708-bcm2710:
     name: brcm2708-bcm2710
     runs-on: ubuntu-18.04
@@ -919,16 +919,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ath79-nand:
     name: ath79-nand
     runs-on: ubuntu-18.04
@@ -940,16 +940,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm47xx-legacy:
     name: brcm47xx-legacy
     runs-on: ubuntu-18.04
@@ -961,16 +961,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm2708-bcm2709:
     name: brcm2708-bcm2709
     runs-on: ubuntu-18.04
@@ -982,16 +982,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ath25-generic:
     name: ath25-generic
     runs-on: ubuntu-18.04
@@ -1003,16 +1003,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm2708-bcm2708:
     name: brcm2708-bcm2708
     runs-on: ubuntu-18.04
@@ -1024,16 +1024,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ath79-tiny:
     name: ath79-tiny
     runs-on: ubuntu-18.04
@@ -1045,16 +1045,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   bcm53xx-generic:
     name: bcm53xx-generic
     runs-on: ubuntu-18.04
@@ -1066,16 +1066,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   imx6-generic:
     name: imx6-generic
     runs-on: ubuntu-18.04
@@ -1087,16 +1087,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ath79-generic:
     name: ath79-generic
     runs-on: ubuntu-18.04
@@ -1108,16 +1108,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   kirkwood-generic:
     name: kirkwood-generic
     runs-on: ubuntu-18.04
@@ -1129,16 +1129,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm47xx-generic:
     name: brcm47xx-generic
     runs-on: ubuntu-18.04
@@ -1150,16 +1150,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   gemini-generic:
     name: gemini-generic
     runs-on: ubuntu-18.04
@@ -1171,16 +1171,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm63xx-generic:
     name: brcm63xx-generic
     runs-on: ubuntu-18.04
@@ -1192,16 +1192,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   brcm63xx-smp:
     name: brcm63xx-smp
     runs-on: ubuntu-18.04
@@ -1213,16 +1213,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   lantiq-xrx200:
     name: lantiq-xrx200
     runs-on: ubuntu-18.04
@@ -1234,16 +1234,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   lantiq-ase:
     name: lantiq-ase
     runs-on: ubuntu-18.04
@@ -1255,16 +1255,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   armvirt-64:
     name: armvirt-64
     runs-on: ubuntu-18.04
@@ -1276,16 +1276,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   at91-sama5:
     name: at91-sama5
     runs-on: ubuntu-18.04
@@ -1297,16 +1297,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   armvirt-32:
     name: armvirt-32
     runs-on: ubuntu-18.04
@@ -1318,16 +1318,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   at91-sam9x:
     name: at91-sam9x
     runs-on: ubuntu-18.04
@@ -1339,16 +1339,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ar71xx-tiny:
     name: ar71xx-tiny
     runs-on: ubuntu-18.04
@@ -1360,16 +1360,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ar71xx-nand:
     name: ar71xx-nand
     runs-on: ubuntu-18.04
@@ -1381,16 +1381,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ar71xx-mikrotik:
     name: ar71xx-mikrotik
     runs-on: ubuntu-18.04
@@ -1402,16 +1402,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   arc770-generic:
     name: arc770-generic
     runs-on: ubuntu-18.04
@@ -1423,16 +1423,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   archs38-generic:
     name: archs38-generic
     runs-on: ubuntu-18.04
@@ -1444,16 +1444,16 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
   ar71xx-generic:
     name: ar71xx-generic
     runs-on: ubuntu-18.04
@@ -1465,13 +1465,13 @@ jobs:
     - name: login
       run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
     - name: build
-      run: docker build --build-arg URL=${{ url }} -t ${{ secrets.docker_repo }}:${{ arch }} .
+      run: docker build --build-arg URL=${{ env.url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
     - name: push
-      run: docker push ${{ secrets.docker_repo }}:${{ arch }}
+      run: docker push ${{ secrets.docker_repo }}:${{ env.arch }}
     - name: output
-      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ arch }}):/output ./${{ arch }}
+      run: docker cp $(docker run -d ${{ secrets.docker_repo }}:${{ env.arch }}):/output ./${{ env.arch }}
     - name: upload
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: ${{ arch }}
-        path: ${{ arch }}
+        name: ${{ env.arch }}
+        path: ${{ env.arch }}
