@@ -11,6 +11,7 @@ ARG URL
 RUN wget -q $URL
 RUN FILE="${URL##*/}" && tar xf "${FILE}" &&  mv "${FILE%.*.*}" sdk
 RUN git clone https://github.com/coolsnowwolf/lede
+RUN git clone https://github.com/fw876/helloworld
 
 WORKDIR /build/sdk
 RUN cp -r ../lede/package/lean/v2ray package/
@@ -19,7 +20,7 @@ RUN cp -r ../lede/package/lean/kcptun package/
 RUN cp -r ../lede/package/lean/ipt2socks package/
 RUN cp -r ../lede/package/lean/pdnsd-alt package/
 RUN cp -r ../lede/package/lean/shadowsocksr-libev package/
-RUN cp -r ../lede/package/lean/luci-app-ssr-plus package/
+RUN cp -r ../helloworld/luci-app-ssr-plus package/
 RUN git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
 RUN git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
 
