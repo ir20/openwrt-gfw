@@ -26,7 +26,6 @@ RUN cp -r ../openwrt-package/package/shadowsocksr-libev package/
 RUN cp -r ../openwrt-package/lienol/luci-app-passwall package/
 
 # Config
-RUN sed -i 's/default y/default n/g' package/v2ray/Config.in
 RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_brook=m/CONFIG_PACKAGE_brook=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
