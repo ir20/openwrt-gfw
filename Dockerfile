@@ -3,12 +3,12 @@ FROM debian:buster
 # Init
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update
-RUN apt-get install -y wget xz-utils git build-essential libncurses5-dev gawk unzip python python3 file
+RUN apt-get install -y curl xz-utils git build-essential libncurses5-dev gawk unzip python python3 file
 
 # Prepare sdk
 WORKDIR /build
 ARG URL
-RUN wget -q $URL
+RUN curl -s -O $URL
 RUN FILE="${URL##*/}" && tar xf "${FILE}" &&  mv "${FILE%.*.*}" sdk
 RUN git clone https://github.com/Lienol/openwrt-package.git
 
