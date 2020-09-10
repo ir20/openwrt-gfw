@@ -40,8 +40,8 @@ RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-server=m/CONFIG_PACKAGE_shadowso
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=m/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall=m/CONFIG_PACKAGE_luci-app-passwall=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=n/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=n/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_V2CTL=y/CONFIG_V2RAY_EXCLUDE_V2CTL=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_ASSETS=y/CONFIG_V2RAY_EXCLUDE_ASSETS=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_COMPRESS_UPX=y/CONFIG_V2RAY_COMPRESS_UPX=n/g' .config
