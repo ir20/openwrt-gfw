@@ -15,8 +15,6 @@ RUN git clone https://github.com/Lienol/openwrt-package.git
 WORKDIR /build/sdk
 RUN cp -r ../openwrt-package/package/brook package/
 RUN cp -r ../openwrt-package/package/v2ray package/
-RUN cp -r ../openwrt-package/package/simple-obfs package/
-RUN cp -r ../openwrt-package/package/v2ray-plugin package/
 RUN cp -r ../openwrt-package/package/trojan-plus package/
 RUN cp -r ../openwrt-package/package/trojan-go package/
 RUN cp -r ../openwrt-package/package/kcptun package/
@@ -32,6 +30,7 @@ RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_brook=m/CONFIG_PACKAGE_brook=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-plus=m/CONFIG_PACKAGE_trojan-plus=y/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_trojan-go=m/CONFIG_PACKAGE_trojan-go=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-client=m/CONFIG_PACKAGE_kcptun-client=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-server=m/CONFIG_PACKAGE_kcptun-server=n/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_tcping=m/CONFIG_PACKAGE_tcping=y/g' .config
@@ -42,10 +41,15 @@ RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-alt=m/CONFIG_PACKAGE_shadowsocks
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-server=m/CONFIG_PACKAGE_shadowsocksr-libev-server=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=m/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall=m/CONFIG_PACKAGE_luci-app-passwall=y/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=n/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_V2CTL=y/CONFIG_V2RAY_EXCLUDE_V2CTL=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_ASSETS=y/CONFIG_V2RAY_EXCLUDE_ASSETS=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_COMPRESS_UPX=y/CONFIG_V2RAY_COMPRESS_UPX=n/g' .config
+RUN sed -i 's/CONFIG_TROJAN_GO_COMPRESS_UPX=y/CONFIG_TROJAN_GO_COMPRESS_UPX=n/g' .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y" >> .config
+RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y" >> .config
+RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
@@ -55,8 +59,6 @@ RUN ./scripts/feeds install pcre boost golang luci-base
 
 RUN make package/brook/compile V=99
 RUN make package/v2ray/compile V=99
-RUN make package/v2ray-plugin/compile V=99
-RUN make package/simple-obfs/compile V=99
 RUN make package/trojan-plus/compile V=99
 RUN make package/trojan-go/compile V=99
 RUN make package/kcptun/compile V=99
@@ -72,7 +74,6 @@ RUN make package/luci-app-passwall/compile V=99
 WORKDIR /output
 RUN mv `find /build/sdk/bin/packages/ | grep brook` .
 RUN mv `find /build/sdk/bin/packages/ | grep v2ray` .
-RUN mv `find /build/sdk/bin/packages/ | grep simple-obfs` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-plus` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-go` .
 RUN mv `find /build/sdk/bin/packages/ | grep kcptun` .
