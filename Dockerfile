@@ -19,7 +19,6 @@ RUN cp -r ../openwrt-package/package/trojan-plus package/
 RUN cp -r ../openwrt-package/package/kcptun package/
 RUN cp -r ../openwrt-package/package/tcping package/
 RUN cp -r ../openwrt-package/package/ipt2socks package/
-RUN cp -r ../openwrt-package/package/dns2socks package/
 RUN cp -r ../openwrt-package/package/pdnsd-alt package/
 RUN cp -r ../openwrt-package/package/chinadns-ng package/
 RUN cp -r ../openwrt-package/package/shadowsocksr-libev package/
@@ -34,19 +33,21 @@ RUN sed -i 's/CONFIG_PACKAGE_kcptun-client=m/CONFIG_PACKAGE_kcptun-client=y/g' .
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-server=m/CONFIG_PACKAGE_kcptun-server=n/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_tcping=m/CONFIG_PACKAGE_tcping=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_ipt2socks=m/CONFIG_PACKAGE_ipt2socks=y/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_dns2socks=m/CONFIG_PACKAGE_dns2socks=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_pdnsd-alt=m/CONFIG_PACKAGE_pdnsd-alt=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_chinadns-ng=m/CONFIG_PACKAGE_chinadns-ng=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-alt=m/CONFIG_PACKAGE_shadowsocksr-libev-alt=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-server=m/CONFIG_PACKAGE_shadowsocksr-libev-server=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=m/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall=m/CONFIG_PACKAGE_luci-app-passwall=y/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=n/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_V2CTL=y/CONFIG_V2RAY_EXCLUDE_V2CTL=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_ASSETS=y/CONFIG_V2RAY_EXCLUDE_ASSETS=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_COMPRESS_UPX=y/CONFIG_V2RAY_COMPRESS_UPX=n/g' .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y" >> .config
-RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y" >> .config
+RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile
 RUN ./scripts/feeds update -a
@@ -58,7 +59,6 @@ RUN make package/trojan-plus/compile V=99
 RUN make package/kcptun/compile V=99
 RUN make package/tcping/compile V=99
 RUN make package/ipt2socks/compile V=99
-RUN make package/dns2socks/compile V=99
 RUN make package/pdnsd-alt/compile V=99
 RUN make package/chinadns-ng/compile V=99
 RUN make package/shadowsocksr-libev/compile V=99
