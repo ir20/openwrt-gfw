@@ -15,7 +15,10 @@ RUN git clone https://github.com/Lienol/openwrt-package.git
 WORKDIR /build/sdk
 RUN cp -r ../openwrt-package/package/brook package/
 RUN cp -r ../openwrt-package/package/v2ray package/
+RUN cp -r ../openwrt-package/package/simple-obfs package/
+RUN cp -r ../openwrt-package/package/v2ray-plugin package/
 RUN cp -r ../openwrt-package/package/trojan-plus package/
+RUN cp -r ../openwrt-package/package/trojan-go package/
 RUN cp -r ../openwrt-package/package/kcptun package/
 RUN cp -r ../openwrt-package/package/tcping package/
 RUN cp -r ../openwrt-package/package/ipt2socks package/
@@ -39,9 +42,6 @@ RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-alt=m/CONFIG_PACKAGE_shadowsocks
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-server=m/CONFIG_PACKAGE_shadowsocksr-libev-server=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=m/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall=m/CONFIG_PACKAGE_luci-app-passwall=y/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=n/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=n/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_V2CTL=y/CONFIG_V2RAY_EXCLUDE_V2CTL=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_ASSETS=y/CONFIG_V2RAY_EXCLUDE_ASSETS=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_COMPRESS_UPX=y/CONFIG_V2RAY_COMPRESS_UPX=n/g' .config
@@ -55,7 +55,10 @@ RUN ./scripts/feeds install pcre boost golang luci-base
 
 RUN make package/brook/compile V=99
 RUN make package/v2ray/compile V=99
+RUN make package/v2ray-plugin/compile V=99
+RUN make package/simple-obfs/compile V=99
 RUN make package/trojan-plus/compile V=99
+RUN make package/trojan-go/compile V=99
 RUN make package/kcptun/compile V=99
 RUN make package/tcping/compile V=99
 RUN make package/ipt2socks/compile V=99
@@ -69,7 +72,9 @@ RUN make package/luci-app-passwall/compile V=99
 WORKDIR /output
 RUN mv `find /build/sdk/bin/packages/ | grep brook` .
 RUN mv `find /build/sdk/bin/packages/ | grep v2ray` .
+RUN mv `find /build/sdk/bin/packages/ | grep simple-obfs` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-plus` .
+RUN mv `find /build/sdk/bin/packages/ | grep trojan-go` .
 RUN mv `find /build/sdk/bin/packages/ | grep kcptun` .
 RUN mv `find /build/sdk/bin/packages/ | grep tcping` .
 RUN mv `find /build/sdk/bin/packages/ | grep ipt2socks` .
