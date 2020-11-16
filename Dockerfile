@@ -24,6 +24,7 @@ RUN cp -r ../openwrt-package/package/pdnsd-alt package/
 RUN cp -r ../openwrt-package/package/chinadns-ng package/
 RUN cp -r ../openwrt-package/package/shadowsocksr-libev package/
 RUN cp -r ../openwrt-package/lienol/luci-app-passwall package/
+RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
 
 # Config
 RUN make defconfig
@@ -56,7 +57,8 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile
 RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install pcre boost golang luci-base
+RUN ./scripts/feeds install pcre boost luci-base
+RUN ./scripts/feeds install golang -p dependencies
 
 RUN make package/brook/compile V=99
 RUN make package/v2ray/compile V=99
