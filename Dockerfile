@@ -58,7 +58,7 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 # Compile
 RUN ./scripts/feeds update -a
 RUN ./scripts/feeds install pcre boost luci-base
-RUN ./scripts/feeds install golang -p dependencies
+RUN ./scripts/feeds install -p dependencies golang
 
 RUN make package/brook/compile V=99
 RUN make package/v2ray/compile V=99
