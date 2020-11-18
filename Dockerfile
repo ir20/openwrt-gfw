@@ -19,6 +19,7 @@ RUN cp -r ../openwrt-package/package/trojan-plus package/
 RUN cp -r ../openwrt-package/package/kcptun package/
 RUN cp -r ../openwrt-package/package/tcping package/
 RUN cp -r ../openwrt-package/package/ipt2socks package/
+RUN cp -r ../openwrt-package/package/microsocks package/
 RUN cp -r ../openwrt-package/package/ssocks package/
 RUN cp -r ../openwrt-package/package/pdnsd-alt package/
 RUN cp -r ../openwrt-package/package/chinadns-ng package/
@@ -36,6 +37,7 @@ RUN sed -i 's/CONFIG_PACKAGE_kcptun-client=m/CONFIG_PACKAGE_kcptun-client=y/g' .
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-server=m/CONFIG_PACKAGE_kcptun-server=n/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_tcping=m/CONFIG_PACKAGE_tcping=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_ipt2socks=m/CONFIG_PACKAGE_ipt2socks=y/g' .config
+RUN sed -i 's/CONFIG_PACKAGE_microsocks=m/CONFIG_PACKAGE_microsocks=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_ssocks=m/CONFIG_PACKAGE_ssocks=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_pdnsd-alt=m/CONFIG_PACKAGE_pdnsd-alt=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_chinadns-ng=m/CONFIG_PACKAGE_chinadns-ng=y/g' .config
@@ -66,6 +68,7 @@ RUN make package/trojan-plus/compile V=99
 RUN make package/kcptun/compile V=99
 RUN make package/tcping/compile V=99
 RUN make package/ipt2socks/compile V=99
+RUN make package/microsocks/compile V=99
 RUN make package/ssocks/compile V=99
 RUN make package/pdnsd-alt/compile V=99
 RUN make package/chinadns-ng/compile V=99
@@ -81,6 +84,7 @@ RUN mv `find /build/sdk/bin/packages/ | grep trojan-plus` .
 RUN mv `find /build/sdk/bin/packages/ | grep kcptun` .
 RUN mv `find /build/sdk/bin/packages/ | grep tcping` .
 RUN mv `find /build/sdk/bin/packages/ | grep ipt2socks` .
+RUN mv `find /build/sdk/bin/packages/ | grep microsocks` .
 RUN mv `find /build/sdk/bin/packages/ | grep ssocks` .
 RUN mv `find /build/sdk/bin/packages/ | grep pdnsd-alt` .
 RUN mv `find /build/sdk/bin/packages/ | grep chinadns-ng` .
