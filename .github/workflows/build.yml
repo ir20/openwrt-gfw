@@ -8,6 +8,7 @@ jobs:
   apm821xx-sata:
     name: apm821xx-sata
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: apm821xx-sata
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/apm821xx/sata/openwrt-sdk-19.07.3-apm821xx-sata_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
@@ -281,6 +282,7 @@ jobs:
   mpc85xx-p2020:
     name: mpc85xx-p2020
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: mpc85xx-p2020
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/mpc85xx/p2020/openwrt-sdk-19.07.3-mpc85xx-p2020_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
@@ -302,6 +304,7 @@ jobs:
   octeon-generic:
     name: octeon-generic
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: octeon-generic
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/octeon/generic/openwrt-sdk-19.07.3-octeon_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
@@ -344,6 +347,7 @@ jobs:
   apm821xx-nand:
     name: apm821xx-nand
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: apm821xx-nand
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/apm821xx/nand/openwrt-sdk-19.07.3-apm821xx-nand_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
@@ -449,6 +453,7 @@ jobs:
   mpc85xx-generic:
     name: mpc85xx-generic
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: mpc85xx-generic
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/mpc85xx/generic/openwrt-sdk-19.07.3-mpc85xx-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
@@ -491,6 +496,7 @@ jobs:
   mpc85xx-p1020:
     name: mpc85xx-p1020
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: mpc85xx-p1020
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/mpc85xx/p1020/openwrt-sdk-19.07.3-mpc85xx-p1020_gcc-7.5.0_musl.Linux-x86_64.tar.xz'
@@ -1415,6 +1421,7 @@ jobs:
   arc770-generic:
     name: arc770-generic
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: arc770-generic
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/arc770/generic/openwrt-sdk-19.07.3-arc770-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz'
@@ -1436,6 +1443,7 @@ jobs:
   archs38-generic:
     name: archs38-generic
     runs-on: ubuntu-18.04
+    continue-on-error: true
     env:
       arch: archs38-generic
       url: 'https://downloads.openwrt.org/releases/19.07.3/targets/archs38/generic/openwrt-sdk-19.07.3-archs38-generic_gcc-8.3.0_uClibc.Linux-x86_64.tar.xz'
