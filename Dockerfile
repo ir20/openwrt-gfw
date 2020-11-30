@@ -19,7 +19,6 @@ RUN cp -r ../openwrt-passwall/xray package/
 RUN cp -r ../openwrt-passwall/trojan-plus package/
 RUN cp -r ../openwrt-passwall/trojan-go package/
 RUN cp -r ../openwrt-passwall/naiveproxy package/
-RUN cp -r ../openwrt-passwall/haproxy package/
 RUN cp -r ../openwrt-passwall/kcptun package/
 RUN cp -r ../openwrt-passwall/tcping package/
 RUN cp -r ../openwrt-passwall/dns2socks package/
@@ -72,26 +71,25 @@ RUN ./scripts/feeds update -a
 RUN ./scripts/feeds install pcre boost luci-base
 RUN ./scripts/feeds install -p dependencies golang
 
-RUN make package/brook/compile V=99
-RUN make package/v2ray/compile V=99
-RUN make package/xray/compile V=99
-RUN make package/trojan-plus/compile V=99
-RUN make package/trojan-go/compile V=99
-RUN make package/naiveproxy/compile V=99
-RUN make package/haproxy/compile V=99
-RUN make package/kcptun/compile V=99
-RUN make package/tcping/compile V=99
-RUN make package/ipt2socks/compile V=99
-RUN make package/dns2socks/compile V=99
-RUN make package/microsocks/compile V=99
-RUN make package/ssocks/compile V=99
-RUN make package/pdnsd-alt/compile V=99
-RUN make package/v2ray-plugin/compile V=99
-RUN make package/simple-obfs/compile V=99
-RUN make package/chinadns-ng/compile V=99
-RUN make package/shadowsocksr-libev/compile V=99
-RUN make package/feeds/luci/luci-base/compile V=99
-RUN make package/luci-app-passwall/compile V=99
+RUN make package/brook/compile V=99 && make package/brook/clean
+RUN make package/v2ray/compile V=99 && make package/v2ray/clean
+RUN make package/xray/compile V=99 && make package/xray/clean
+RUN make package/trojan-plus/compile V=99 && make package/trojan-plus/clean
+RUN make package/trojan-go/compile V=99 && make package/trojan-go/clean
+RUN make package/naiveproxy/compile V=99 && make package/naiveproxy/clean
+RUN make package/kcptun/compile V=99 && make package/kcptun/clean
+RUN make package/tcping/compile V=99 && make package/tcping/clean
+RUN make package/ipt2socks/compile V=99 && make package/ipt2socks/clean
+RUN make package/dns2socks/compile V=99 && make package/dns2socks/clean
+RUN make package/microsocks/compile V=99 && make package/microsocks/clean
+RUN make package/ssocks/compile V=99 && make package/ssocks/clean
+RUN make package/pdnsd-alt/compile V=99 && make package/pdnsd-alt/clean
+RUN make package/v2ray-plugin/compile V=99 && make package/v2ray-plugin/clean
+RUN make package/simple-obfs/compile V=99 && make package/simple-obfs/clean
+RUN make package/chinadns-ng/compile V=99 && make package/chinadns-ng/clean
+RUN make package/shadowsocksr-libev/compile V=99 && make package/shadowsocksr-libev/clean
+RUN make package/feeds/luci/luci-base/compile V=99 && make package/feeds/luci/luci-base/clean
+RUN make package/luci-app-passwall/compile V=99 && make package/luci-app-passwall/clean
 
 # Output
 WORKDIR /output
@@ -101,7 +99,6 @@ RUN mv `find /build/sdk/bin/packages/ | grep xray` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-plus` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-go` .
 RUN mv `find /build/sdk/bin/packages/ | grep naiveproxy` .
-RUN mv `find /build/sdk/bin/packages/ | grep haproxy` .
 RUN mv `find /build/sdk/bin/packages/ | grep kcptun` .
 RUN mv `find /build/sdk/bin/packages/ | grep tcping` .
 RUN mv `find /build/sdk/bin/packages/ | grep ipt2socks` .
