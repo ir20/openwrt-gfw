@@ -3,7 +3,7 @@ FROM debian:buster
 # Init
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update
-RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev gawk unzip python python3 file
+RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev libxml2 gawk upx unzip python python3 file
 
 # Prepare sdk
 WORKDIR /build
@@ -31,6 +31,7 @@ RUN cp -r ../openwrt-passwall/shadowsocksr-libev package/
 RUN cp -r ../openwrt-passwall/v2ray-plugin package/
 RUN cp -r ../openwrt-passwall/simple-obfs package/
 RUN cp -r ../openwrt-passwall/luci-app-passwall package/
+RUN ln -s `which upx` staging_dir/host/bin/upx  
 RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
 
 # Config
@@ -57,8 +58,6 @@ RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=m/CONFIG_PACKAGE_shado
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall=m/CONFIG_PACKAGE_luci-app-passwall=y/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_V2CTL=y/CONFIG_V2RAY_EXCLUDE_V2CTL=n/g' .config
 RUN sed -i 's/CONFIG_V2RAY_EXCLUDE_ASSETS=y/CONFIG_V2RAY_EXCLUDE_ASSETS=n/g' .config
-RUN sed -i 's/CONFIG_V2RAY_COMPRESS_UPX=y/CONFIG_V2RAY_COMPRESS_UPX=n/g' .config
-RUN sed -i 's/CONFIG_TROJAN_GO_COMPRESS_UPX=y/CONFIG_TROJAN_GO_COMPRESS_UPX=n/g' .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y" >> .config
@@ -67,30 +66,30 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
-# Compile
+# Compile 
 RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install pcre boost ninja luci-base
+RUN ./scripts/feeds install pcre boost nss libev luci-base
 RUN ./scripts/feeds install -p dependencies golang
 
-RUN make package/brook/compile V=99 && make package/brook/clean
-RUN make package/v2ray/compile V=99 && make package/v2ray/clean
-RUN make package/xray/compile V=99 && make package/xray/clean
-RUN make package/trojan-plus/compile V=99 && make package/trojan-plus/clean
-RUN make package/trojan-go/compile V=99 && make package/trojan-go/clean
-RUN make package/naiveproxy/compile V=99 && make package/naiveproxy/clean
-RUN make package/kcptun/compile V=99 && make package/kcptun/clean
-RUN make package/tcping/compile V=99 && make package/tcping/clean
-RUN make package/ipt2socks/compile V=99 && make package/ipt2socks/clean
-RUN make package/dns2socks/compile V=99 && make package/dns2socks/clean
-RUN make package/microsocks/compile V=99 && make package/microsocks/clean
-RUN make package/ssocks/compile V=99 && make package/ssocks/clean
-RUN make package/pdnsd-alt/compile V=99 && make package/pdnsd-alt/clean
-RUN make package/v2ray-plugin/compile V=99 && make package/v2ray-plugin/clean
-RUN make package/simple-obfs/compile V=99 && make package/simple-obfs/clean
-RUN make package/chinadns-ng/compile V=99 && make package/chinadns-ng/clean
-RUN make package/shadowsocksr-libev/compile V=99 && make package/shadowsocksr-libev/clean
-RUN make package/feeds/luci/luci-base/compile V=99 && make package/feeds/luci/luci-base/clean
-RUN make package/luci-app-passwall/compile V=99 && make package/luci-app-passwall/clean
+RUN make package/brook/compile V=99
+RUN make package/v2ray/compile V=99
+RUN make package/xray/compile V=99
+RUN make package/trojan-plus/compile V=99
+RUN make package/trojan-go/compile V=99
+RUN make package/naiveproxy/compile V=99
+RUN make package/kcptun/compile V=99
+RUN make package/tcping/compile V=99
+RUN make package/ipt2socks/compile V=99
+RUN make package/dns2socks/compile V=99
+RUN make package/microsocks/compile V=99
+RUN make package/ssocks/compile V=99
+RUN make package/pdnsd-alt/compile V=99
+RUN make package/v2ray-plugin/compile V=99
+RUN make package/simple-obfs/compile V=99
+RUN make package/chinadns-ng/compile V=99
+RUN make package/shadowsocksr-libev/compile V=99
+RUN make package/feeds/luci/luci-base/compile V=99
+RUN make package/luci-app-passwall/compile V=99
 
 # Output
 WORKDIR /output
