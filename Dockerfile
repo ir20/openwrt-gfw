@@ -90,7 +90,6 @@ RUN make package/luci-app-passwall/compile V=99
 # Output
 WORKDIR /output
 RUN mv `find /build/sdk/bin/packages/ | grep brook` .
-RUN mv `find /build/sdk/bin/packages/ | grep v2ray` .
 RUN mv `find /build/sdk/bin/packages/ | grep xray` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-plus` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-go` .
@@ -105,6 +104,7 @@ RUN mv `find /build/sdk/bin/packages/ | grep v2ray-plugin` .
 RUN mv `find /build/sdk/bin/packages/ | grep simple-obfs` .
 RUN mv `find /build/sdk/bin/packages/ | grep chinadns-ng` .
 RUN mv `find /build/sdk/bin/packages/ | grep shadowsocksr-libev` .
+RUN mv `find /build/sdk/bin/packages/ | grep v2ray` .
 RUN mv `find /build/sdk/bin/packages/ | grep luci-app-passwall` .
 
 ENTRYPOINT ["/bin/bash", "-c", "python3 -u -m http.server -b `awk 'END{print $1}' /etc/hosts` 80"]
