@@ -1,4 +1,4 @@
-# openwrt-gfw ![.github/workflows/build.yml](https://github.com/mwffs/openwrt-gfw/workflows/.github/workflows/build.yml/badge.svg)
+# openwrt-gfw ![.github/workflows/build.yml](https://github.com/mwftts/openwrt-gfw/workflows/.github/workflows/build.yml/badge.svg)
 OpenWrt 19.07.6 gfw Packages
 
 
