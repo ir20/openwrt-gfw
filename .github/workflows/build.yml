@@ -25,7 +25,7 @@ jobs:
         beta: [false]
         download-url:
           - https://downloads.openwrt.org/releases/19.07.6/targets/x86/64/openwrt-sdk-19.07.6-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz
-		  - https://downloads.openwrt.org/releases/19.07.6/targets/x86/generic/openwrt-sdk-19.07.6-x86-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz
+          - https://downloads.openwrt.org/releases/19.07.6/targets/x86/generic/openwrt-sdk-19.07.6-x86-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz
         include:
           - download-url: https://downloads.openwrt.org/releases/19.07.6/targets/x86/geode/openwrt-sdk-19.07.6-x86-geode_gcc-7.5.0_musl.Linux-x86_64.tar.xz
             beta: true
