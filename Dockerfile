@@ -31,7 +31,7 @@ RUN cp -r ../openwrt-passwall/v2ray-plugin package/
 RUN cp -r ../openwrt-passwall/simple-obfs package/
 RUN cp -r ../openwrt-passwall/luci-app-passwall package/
 RUN ln -s `which upx` staging_dir/host/bin/upx  
-RUN echo "src-git dependencies https://github.com/xiaorouji/openwrt-passwall.git;19.07" >> feeds.conf.default
+RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
 
 # Config
 RUN make defconfig
@@ -64,9 +64,13 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile 
+RUN ./scripts/feeds clean
 RUN ./scripts/feeds update -a
+RUN ./scripts/feeds install -a
 RUN ./scripts/feeds install pcre boost libev luci-base
 RUN ./scripts/feeds install -p dependencies golang
+#RUN ./scripts/feeds uninstall xray-core
+#RUN ./scripts/feeds install -p passwall -f xray-core
 
 RUN make package/brook/compile V=99
 RUN make package/v2ray/compile V=99
