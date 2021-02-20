@@ -24,11 +24,11 @@ jobs:
       matrix:
         beta: [false]
         download-url:
-          - https://downloads.openwrt.org/releases/19.07.6/targets/x86/64/openwrt-sdk-19.07.6-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz
+          - https://downloads.openwrt.org/releases/19.07.7/targets/x86/64/openwrt-sdk-19.07.7-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz
         include:
-          - download-url: https://downloads.openwrt.org/releases/19.07.6/targets/x86/geode/openwrt-sdk-19.07.6-x86-geode_gcc-7.5.0_musl.Linux-x86_64.tar.xz
+          - download-url: https://downloads.openwrt.org/releases/19.07.7/targets/x86/64/openwrt-sdk-19.07.7-x86-64_gcc-7.5.0_musl.Linux-x86_64.tar.xz
             beta: true
-          - download-url: https://downloads.openwrt.org/releases/19.07.6/targets/x86/generic/openwrt-sdk-19.07.6-x86-generic_gcc-7.5.0_musl.Linux-x86_64.tar.xz
+          - download-url: https://downloads.openwrt.org/releases/19.07.7/targets/x86/generic/openwrt-imagebuilder-19.07.7-x86-generic.Linux-x86_64.tar.xz
             beta: true
     runs-on: ubuntu-latest
     needs: create-release
@@ -38,7 +38,7 @@ jobs:
       - name: login
         run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
       - name: env
-        run: echo arch=$(echo ${{ matrix.download-url }} | sed -e 's/.*openwrt-sdk-19.07.6-\(.*\)_gcc.*/\1/') >> $GITHUB_ENV
+        run: echo arch=$(echo ${{ matrix.download-url }} | sed -e 's/.*openwrt-sdk-19.07.7-\(.*\)_gcc.*/\1/') >> $GITHUB_ENV
       - name: build
         run: docker build --build-arg URL=${{ matrix.download-url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
       - name: push
@@ -63,7 +63,7 @@ jobs:
       - create-release
       - build-package
     steps:
-      - uses: eregon/publish-release@v1
+      - uses: mwftts/publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
