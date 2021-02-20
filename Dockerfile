@@ -14,7 +14,7 @@ RUN git clone https://github.com/xiaorouji/openwrt-passwall.git
 
 WORKDIR /build/sdk
 RUN cp -r ../openwrt-passwall/brook package/
-RUN cp -r ../openwrt-passwall/v2ray package/
+#RUN cp -r ../openwrt-passwall/v2ray package/
 RUN cp -r ../openwrt-passwall/xray package/
 RUN cp -r ../openwrt-passwall/trojan-plus package/
 RUN cp -r ../openwrt-passwall/trojan-go package/
@@ -40,7 +40,7 @@ RUN ./scripts/feeds update -a
 RUN ./scripts/feeds install -a
 RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_brook=m/CONFIG_PACKAGE_brook=y/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
+#RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_xray=m/CONFIG_PACKAGE_xray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-plus=m/CONFIG_PACKAGE_trojan-plus=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-go=m/CONFIG_PACKAGE_trojan-go=y/g' .config
