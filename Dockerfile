@@ -37,7 +37,7 @@ RUN cp -r ../openwrt-passwall/simple-obfs package/
 RUN cp -r ../openwrt-passwall/luci-app-passwall package/
 RUN ln -s `which upx` staging_dir/host/bin/upx  
 RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
-#RUN echo "git clone https://github.com/kenzok8/small.git" >> feeds.conf.default
+RUN echo "src-git dependencies https://github.com/kenzok8/small.git" >> feeds.conf.default
 
 # Config
 RUN make defconfig
