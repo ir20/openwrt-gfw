@@ -13,6 +13,11 @@ RUN FILE="${URL##*/}" && tar xf "${FILE}" &&  mv "${FILE%.*.*}" sdk
 RUN git clone https://github.com/xiaorouji/openwrt-passwall.git
 
 WORKDIR /build/sdk
+RUN ./scripts/feeds clean
+RUN ./scripts/feeds update -a
+RUN ./scripts/feeds install -a
+RUN ./scripts/feeds uninstall xray-core
+RUN ./scripts/feeds install -p passwall -f xray-core
 RUN cp -r ../openwrt-passwall/brook package/
 #RUN cp -r ../openwrt-passwall/v2ray package/
 RUN cp -r ../openwrt-passwall/xray package/
@@ -35,11 +40,6 @@ RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19
 #RUN echo "git clone https://github.com/kenzok8/small.git" >> feeds.conf.default
 
 # Config
-RUN ./scripts/feeds clean
-RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install -a
-RUN ./scripts/feeds uninstall xray-core
-RUN ./scripts/feeds install -p passwall -f xray-core
 RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_brook=m/CONFIG_PACKAGE_brook=y/g' .config
 #RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
