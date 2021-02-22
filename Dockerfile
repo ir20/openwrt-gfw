@@ -11,10 +11,17 @@ ARG URL
 RUN curl -s -O $URL
 RUN FILE="${URL##*/}" && tar xf "${FILE}" &&  mv "${FILE%.*.*}" sdk
 RUN git clone https://github.com/xiaorouji/openwrt-passwall.git
+RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
+RUN echo "src-git dependencies https://github.com/kenzok8/small.git" >> feeds.conf.default
 
 WORKDIR /build/sdk
+RUN ./scripts/feeds clean
+RUN ./scripts/feeds update -a
+RUN ./scripts/feeds install -a
+RUN ./scripts/feeds uninstall xray-core
+RUN ./scripts/feeds install -p passwall -f xray-core
 RUN cp -r ../openwrt-passwall/brook package/
-RUN cp -r ../openwrt-passwall/v2ray package/
+#RUN cp -r ../openwrt-passwall/v2ray package/
 RUN cp -r ../openwrt-passwall/xray package/
 RUN cp -r ../openwrt-passwall/trojan-plus package/
 RUN cp -r ../openwrt-passwall/trojan-go package/
@@ -31,12 +38,11 @@ RUN cp -r ../openwrt-passwall/v2ray-plugin package/
 RUN cp -r ../openwrt-passwall/simple-obfs package/
 RUN cp -r ../openwrt-passwall/luci-app-passwall package/
 RUN ln -s `which upx` staging_dir/host/bin/upx  
-RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
 
 # Config
 RUN make defconfig
 RUN sed -i 's/CONFIG_PACKAGE_brook=m/CONFIG_PACKAGE_brook=y/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
+#RUN sed -i 's/CONFIG_PACKAGE_v2ray=m/CONFIG_PACKAGE_v2ray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_xray=m/CONFIG_PACKAGE_xray=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-plus=m/CONFIG_PACKAGE_trojan-plus=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-go=m/CONFIG_PACKAGE_trojan-go=y/g' .config
@@ -65,11 +71,12 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile 
 RUN ./scripts/feeds update -a
+RUN ./scripts/feeds install -a
 RUN ./scripts/feeds install pcre boost libev luci-base
 RUN ./scripts/feeds install -p dependencies golang
 
 RUN make package/brook/compile V=99
-RUN make package/v2ray/compile V=99
+#RUN make package/v2ray/compile V=99
 RUN make package/xray/compile V=99
 RUN make package/trojan-plus/compile V=99
 RUN make package/trojan-go/compile V=99
@@ -104,7 +111,7 @@ RUN mv `find /build/sdk/bin/packages/ | grep v2ray-plugin` .
 RUN mv `find /build/sdk/bin/packages/ | grep simple-obfs` .
 RUN mv `find /build/sdk/bin/packages/ | grep chinadns-ng` .
 RUN mv `find /build/sdk/bin/packages/ | grep shadowsocksr-libev` .
-RUN mv `find /build/sdk/bin/packages/ | grep v2ray` .
+#RUN mv `find /build/sdk/bin/packages/ | grep v2ray` .
 RUN mv `find /build/sdk/bin/packages/ | grep luci-app-passwall` .
 
 ENTRYPOINT ["/bin/bash", "-c", "python3 -u -m http.server -b `awk 'END{print $1}' /etc/hosts` 80"]
