@@ -62,7 +62,6 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Kcptun=y" >> .config
-RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile 
