@@ -3,7 +3,7 @@ FROM debian:buster
 # Init
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update
-RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev gawk upx unzip python python3 file
+RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev libxml2 gawk upx unzip python python3 file
 
 # Prepare sdk
 WORKDIR /build
