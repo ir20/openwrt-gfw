@@ -3,7 +3,7 @@ FROM debian:buster
 # Init
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update
-RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev libxml2 gawk upx unzip python python3 file
+RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev gawk upx unzip python python3 file
 
 # Prepare sdk
 WORKDIR /build
@@ -17,7 +17,6 @@ RUN cp -r ../openwrt-passwall/brook package/
 RUN cp -r ../openwrt-passwall/xray-core package/
 RUN cp -r ../openwrt-passwall/trojan-plus package/
 RUN cp -r ../openwrt-passwall/trojan-go package/
-RUN cp -r ../openwrt-passwall/naiveproxy package/
 RUN cp -r ../openwrt-passwall/kcptun package/
 RUN cp -r ../openwrt-passwall/tcping package/
 RUN cp -r ../openwrt-passwall/dns2socks package/
@@ -40,7 +39,6 @@ RUN sed -i 's/CONFIG_PACKAGE_xray-core=m/CONFIG_PACKAGE_xray-core=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_xray-geodata=m/CONFIG_PACKAGE_xray-geodata=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-plus=m/CONFIG_PACKAGE_trojan-plus=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_trojan-go=m/CONFIG_PACKAGE_trojan-go=y/g' .config
-RUN sed -i 's/CONFIG_PACKAGE_naiveproxy=m/CONFIG_PACKAGE_naiveproxy=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-client=m/CONFIG_PACKAGE_kcptun-client=y/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_kcptun-server=m/CONFIG_PACKAGE_kcptun-server=n/g' .config
 RUN sed -i 's/CONFIG_PACKAGE_tcping=m/CONFIG_PACKAGE_tcping=y/g' .config
@@ -57,21 +55,19 @@ RUN sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=m/CONFIG_PACKAGE_shado
 RUN sed -i 's/CONFIG_PACKAGE_luci-app-passwall=m/CONFIG_PACKAGE_luci-app-passwall=y/g' .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y" >> .config
-RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Kcptun=y" >> .config
 RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile 
 RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install pcre boost libev nss luci-base
+RUN ./scripts/feeds install pcre boost libev luci-base
 RUN ./scripts/feeds install -p dependencies golang
 
 RUN make package/brook/compile V=99
 RUN make package/xray-core/compile V=99
 RUN make package/trojan-plus/compile V=99
 RUN make package/trojan-go/compile V=99
-RUN make package/naiveproxy/compile V=99
 RUN make package/kcptun/compile V=99
 RUN make package/tcping/compile V=99
 RUN make package/ipt2socks/compile V=99
@@ -92,7 +88,6 @@ RUN mv `find /build/sdk/bin/packages/ | grep brook` .
 RUN mv `find /build/sdk/bin/packages/ | grep xray-core` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-plus` .
 RUN mv `find /build/sdk/bin/packages/ | grep trojan-go` .
-RUN mv `find /build/sdk/bin/packages/ | grep naiveproxy` .
 RUN mv `find /build/sdk/bin/packages/ | grep kcptun` .
 RUN mv `find /build/sdk/bin/packages/ | grep tcping` .
 RUN mv `find /build/sdk/bin/packages/ | grep ipt2socks` .
