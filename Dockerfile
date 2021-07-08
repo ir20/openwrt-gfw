@@ -3,7 +3,7 @@ FROM debian:buster
 # Init
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update
-RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev libsodium-dev gawk upx unzip python python3 file
+RUN apt-get install -y curl wget xz-utils git build-essential libncurses5-dev gawk upx unzip python python3 file
 
 # Prepare sdk
 WORKDIR /build
@@ -61,7 +61,7 @@ RUN echo "CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y" >> .config
 
 # Compile 
 RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install pcre boost libev luci-base
+RUN ./scripts/feeds install pcre boost libev libsodium luci-base
 RUN ./scripts/feeds install -p dependencies golang
 
 RUN make package/brook/compile V=99
