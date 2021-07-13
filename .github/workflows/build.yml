@@ -114,7 +114,7 @@ jobs:
       - name: login
         run: echo "${{ secrets.docker_password }}" | docker login -u "${{ secrets.docker_username }}" --password-stdin
       - name: env
-        run: echo arch=$(echo ${{ matrix.download-url }} | sed -e 's/.*openwrt-sdk-19.07.4-\(.*\)_gcc.*/\1/') >> $GITHUB_ENV
+        run: echo arch=$(echo ${{ matrix.download-url }} | sed -e 's/.*openwrt-sdk-19.07.7-\(.*\)_gcc.*/\1/') >> $GITHUB_ENV
       - name: build
         run: docker build --build-arg URL=${{ matrix.download-url }} -t ${{ secrets.docker_repo }}:${{ env.arch }} .
       - name: push
