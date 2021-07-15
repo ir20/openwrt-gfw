@@ -15,8 +15,8 @@ RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19
 RUN echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git" >> feeds.conf.default
 
 RUN ./scripts/feeds update -a
-RUN ./scripts/feeds install -p dependencies golang
 RUN ./scripts/feeds install -p passwall luci-app-passwall xray-plugin
+RUN ./scripts/feeds install -p dependencies golang
 
 RUN sed -i 's/include $(INCLUDE_DIR)\/package.mk/PKG_BUILD_DIR := $(BUILD_DIR)\/$(PKG_NAME)-$(PKG_VERSION)\n\ninclude $(INCLUDE_DIR)\/package.mk/' package/feeds/passwall/luci-app-passwall/Makefile
 
