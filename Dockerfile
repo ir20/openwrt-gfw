@@ -28,7 +28,7 @@ RUN cp -r ../openwrt-passwall/simple-obfs package/
 RUN cp -r ../openwrt-passwall/luci-app-passwall package/
 RUN ln -s `which upx` staging_dir/host/bin/upx  
 RUN echo "src-git dependencies https://github.com/Lienol/openwrt-packages.git;19.07" >> feeds.conf.default
-RUN sed -i 's/include $(INCLUDE_DIR)\/package.mk/PKG_BUILD_DIR := $(BUILD_DIR)\/$(PKG_NAME)-$(PKG_VERSION)\n\ninclude $(INCLUDE_DIR)\/package.mk/' package/feeds/passwall/luci-app-passwall/Makefile
+RUN sed -i 's/include $(INCLUDE_DIR)\/package.mk/PKG_BUILD_DIR := $(BUILD_DIR)\/$(PKG_NAME)-$(PKG_VERSION)\n\ninclude $(INCLUDE_DIR)\/package.mk/' package/luci-app-passwall/Makefile
 
 # Config
 RUN make defconfig
